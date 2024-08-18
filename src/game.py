@@ -1,5 +1,7 @@
 import pygame
 
+from src.colors import colorUI_BACKGROUND, colorWHITE, colorBLACK
+
 
 class Game:
     def __init__(self, screen):
@@ -13,11 +15,11 @@ class Game:
 
     def draw(self):
         # очищення екрана
-        self.screen.fill((0, 0, 0))  # Заполняем черным цветом
+        self.screen.fill(colorUI_BACKGROUND)
 
         # малювання об'єктів
 
         # малювання тексту
-        font = pygame.font.Font(None, 36)
-        text = font.render("My RPG Game", True, (255, 255, 255))
+        font = pygame.font.Font(None, 38)
+        text = font.render("Text here", True, colorWHITE)
         self.screen.blit(text, (10, 10))
