@@ -1,13 +1,13 @@
 import pygame
 
-from src.colors import colorSAND, colorBLUE
+from src.colors import colorSAND, colorRED
 
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, position):
         super().__init__()
         self.image = pygame.Surface((32, 32))
-        self.image.fill(colorBLUE)
+        self.image.fill(colorRED)
         self.rect = self.image.get_rect(center=position)
         self.speed = 200  # швидкість гравця
 
