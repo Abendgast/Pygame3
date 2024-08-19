@@ -13,7 +13,7 @@ class Map:
         # налаштування рендерера для відтворення карти
         screen_width, screen_height = pygame.display.get_surface().get_size()
         self.map_layer = pyscroll.BufferedRenderer(map_data, (screen_width, screen_height))
-        self.map_layer.zoom = 1  # масштабування
+        self.map_layer.zoom = 1.5  # масштабування
 
         # Створення групи спрайтів, яка включає картку та гравця
         self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
