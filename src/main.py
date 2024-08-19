@@ -22,9 +22,12 @@ while True:
             pygame.quit()
             sys.exit()
 
+    # Получаем текущие нажатые клавиши
+    keys = pygame.key.get_pressed()
+
     # Обновление логики игры
     dt = clock.tick(60) / 1000  # Делим на 1000 для получения значения в секундах
-    game.update(dt)
+    game.update(dt, keys)
 
     # Отрисовка игры
     game.draw()
