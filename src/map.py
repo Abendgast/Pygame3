@@ -2,32 +2,30 @@ import pygame
 import pytmx
 import pyscroll
 
-
 class Map:
     def __init__(self, filename):
         # Загрузка TMX карты
-        self.tmx_data = pytmx.load_pygame(filename)
+        self.tmx_data = pytmx.util_pygame.load_pygame(filename)
 
         # Создание данных для прокрутки карты
         map_data = pyscroll.data.TiledMapData(self.tmx_data)
 
-        # Получение размера экрана (предполагаем, что он установлен в game.py)
+        # Настройка рендерера для отображения карты
         screen_width, screen_height = pygame.display.get_surface().get_size()
+        self.map_layer = pyscroll.BufferedRenderer(map_data, (screen_width, screen_height))
+        self.map_layer.zoom = 1  # Масштабирование, если необходимо
 
-        # Создание группы для прокрутки с небольшим запасом по краям
-        self.map_layer = pyscroll.BufferedRenderer(map_data, (screen_width, screen_height), clamp_camera=True)
-
-        # Создание группы спрайтов с картой
-        self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
+        # Создание группы спрайтов, которая включает карту
+        self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer)
 
     def draw(self, surface):
-        # Отрисовка карты
+        # Отрисовка карты и объектов
         self.group.draw(surface)
 
     def update(self, dt):
-        # Обновление группы спрайтов (если необходимо)
+        # Обновление логики группы, если потребуется
         self.group.update(dt)
 
-    def move_camera(self, position):
-        # Перемещение камеры к указанной позиции
+    def center_camera_on(self, position):
+        # Центрирование камеры на заданной позиции
         self.group.center(position)
