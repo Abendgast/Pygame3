@@ -2,35 +2,43 @@ import pygame
 import sys
 from game import Game
 
-# Инициализация Pygame
+# ініціалізація Pygame
 pygame.init()
 
-# Настройки окна
+# налаштування вікна
 SCREEN_WIDTH = 960
 SCREEN_HEIGHT = 640
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("RPG Game")
 
-# Создаем экземпляр игры
+# створення екземпляру
 game = Game(screen)
 
-# Основной игровой цикл
+# Основний цикл
 clock = pygame.time.Clock()
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+running = True  # прапор для керування циклом
 
-    # Получаем текущие нажатые клавиши
-    keys = pygame.key.get_pressed()
+try:
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False  # прапор виходу
 
-    # Обновление логики игры
-    dt = clock.tick(60) / 1000  # Делим на 1000 для получения значения в секундах
-    game.update(dt, keys)
+        # стан клавіш
+        keys = pygame.key.get_pressed()
 
-    # Отрисовка игры
-    game.draw()
+        # оновлення логіки
+        dt = clock.tick(60) / 1000  # значення в секундах
+        game.update(dt, keys)
 
-    # Обновление экрана
-    pygame.display.flip()
+        # малювання гри
+        game.draw()
+
+        # оновлення екрана
+        pygame.display.flip()
+except KeyboardInterrupt:
+    pass  # вихід через перехоплення преривання
+
+finally:
+    pygame.quit()
+    sys.exit()

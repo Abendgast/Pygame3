@@ -9,10 +9,10 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.Surface((32, 32))
         self.image.fill(colorBLUE)
         self.rect = self.image.get_rect(center=position)
-        self.speed = 200  # Скорость движения игрока
+        self.speed = 200  # швидкість гравця
 
     def update(self, dt, keys):
-        # Движение игрока с использованием WASD
+        # керування WASD
         dx = 0
         dy = 0
         if keys[pygame.K_w]:
@@ -24,6 +24,6 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_d]:
             dx = self.speed * dt
 
-        # Обновление позиции игрока
+        # оновлення позиції
         self.rect.x += dx
         self.rect.y += dy

@@ -6,33 +6,33 @@ class Game:
     def __init__(self, screen):
         self.screen = screen
 
-        # Загрузка карты
+        # Завантаження карти
 
         # self.map = Map(r"C:\Users\Spril\Work\Pygame3\Pygame3\assets\images\Location\Map1.tmx") #(резерв)
         self.map = Map(r"C:\Users\Spril\Work\Pygame3\Pygame3\assets\images\Tilesets\RPG\TiledMapEditor\SMD.tmx")
 
-        # Создание игрока в центре карты
+        # Створення гравця у центрі карти
         start_pos = (self.map.tmx_data.width * self.map.tmx_data.tilewidth // 2,
                      self.map.tmx_data.height * self.map.tmx_data.tileheight // 2)
         self.player = Player(start_pos)
 
-        # Добавление игрока в группу спрайтов карты
+        # Додавання гравця до групи спрайтів картки
         self.map.group.add(self.player)
 
-        # Изначальная позиция камеры (центр карты)
+        # Початкова позиція камери (центр картки)
         self.camera_pos = (self.map.tmx_data.width * self.map.tmx_data.tilewidth // 2,
                            self.map.tmx_data.height * self.map.tmx_data.tileheight // 2)
 
     def update(self, dt, keys):
-        # Обновление карты (и других элементов)
+        # Оновлення картки (та інших елементів)
         self.map.update(dt, keys)
 
     def draw(self):
-        # Очистка экрана
+        # Очистка екрану
         self.screen.fill((0, 0, 0))
 
-        # Центрирование камеры на позиции игрока
+        # Центрування камери на позиції гравця
         self.map.center_camera_on(self.player.rect.center)
 
-        # Отрисовка карты и всех объектов
+        # Відображення карти та всіх об'єктів
         self.map.draw(self.screen)
