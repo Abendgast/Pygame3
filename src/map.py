@@ -16,7 +16,7 @@ class Map:
         self.map_layer.zoom = 1  # масштабування
 
         # Створення групи спрайтів, яка включає картку та гравця
-        self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer)
+        self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
 
     def draw(self, surface):
         # Малювання карти та об'єктів
@@ -30,3 +30,7 @@ class Map:
     def center_camera_on(self, position):
         # Центрування камери на заданій позиції
         self.group.center(position)
+
+    def add_player_to_group(self, player):
+        # Добавляем игрока в нужный слой
+        self.group.add(player, layer=3)  # Добавляем в третий слой (начиная с 0)

@@ -7,8 +7,6 @@ class Game:
         self.screen = screen
 
         # Завантаження карти
-
-        # self.map = Map(r"C:\Users\Spril\Work\Pygame3\Pygame3\assets\images\Location\Map1.tmx") #(резерв)
         self.map = Map(r"C:\Users\Spril\Work\Pygame3\Pygame3\assets\images\Tilesets\RPG\TiledMapEditor\SMD.tmx")
 
         # Створення гравця у центрі карти
@@ -16,8 +14,8 @@ class Game:
                      self.map.tmx_data.height * self.map.tmx_data.tileheight // 2)
         self.player = Player(start_pos)
 
-        # Додавання гравця до групи спрайтів картки
-        self.map.group.add(self.player)
+        # Додавання гравця у слої
+        self.map.add_player_to_group(self.player)
 
         # Початкова позиція камери (центр картки)
         self.camera_pos = (self.map.tmx_data.width * self.map.tmx_data.tilewidth // 2,
