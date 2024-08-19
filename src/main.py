@@ -2,19 +2,19 @@ import pygame
 import sys
 from game import Game
 
-#  ініціалізація
+# Инициализация
 pygame.init()
 
-# налаштування вікна
+# Настройки окна
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("GMainScreen")
 
-# екземпляр гри
+# Экземпляр игры
 game = Game(screen)
 
-# основний цикл
+# Основной цикл
 clock = pygame.time.Clock()
 while True:
     for event in pygame.event.get():
@@ -22,14 +22,12 @@ while True:
             pygame.quit()
             sys.exit()
 
-    # оновлення логіки
-    game.update()
+    # Обновление логики
+    dt = clock.tick(60) / 1000  # Получаем время, прошедшее с последнего кадра в секундах
+    game.update(dt)
 
-    # малювання
+    # Отрисовка
     game.draw()
 
-    # оновлення екрану
+    # Обновление экрана
     pygame.display.flip()
-
-    # обмеження FPS
-    clock.tick(60)

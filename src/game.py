@@ -1,25 +1,32 @@
+from map import Map
 import pygame
-
-from src.colors import colorUI_BACKGROUND, colorWHITE, colorBLACK
-
 
 class Game:
     def __init__(self, screen):
         self.screen = screen
         self.running = True
-        # Інші атрибути (гравець, карта і т.д.)
 
-    def update(self):
-        # оновлення логіки
-        pass
+        # Загрузка карты
+        self.map = Map(r"C:\Users\Spril\Work\Pygame3\Pygame3\assets\images\Location\Map1.tmx")
+
+        # Временная позиция камеры (центр карты)
+        self.camera_pos = (self.map.tmx_data.width * self.map.tmx_data.tilewidth // 2,
+                           self.map.tmx_data.height * self.map.tmx_data.tileheight // 2)
+
+    def update(self, dt):
+        # Обновление карты
+        self.map.update(dt)
+
+        # Здесь будет обновляться другая игровая логика
 
     def draw(self):
-        # очищення екрана
-        self.screen.fill(colorUI_BACKGROUND)
+        # Очистка экрана
+        self.screen.fill((0, 0, 0))  # Заполняем черным цветом
 
-        # малювання об'єктів
+        # Перемещение камеры
+        self.map.move_camera(self.camera_pos)
 
-        # малювання тексту
-        font = pygame.font.Font(None, 38)
-        text = font.render("Text here", True, colorWHITE)
-        self.screen.blit(text, (10, 10))
+        # Отрисовка карты
+        self.map.draw(self.screen)
+
+        # Здесь будет отрисовка других игровых объектов
