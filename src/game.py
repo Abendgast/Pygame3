@@ -7,7 +7,8 @@ class Game:
         self.screen = screen
 
         # Завантаження карти
-        self.map = Map(r"C:\Users\Spril\Work\Pygame3\Pygame3\assets\images\Tilesets\RPG\TiledMapEditor\SMD.tmx")
+        self.map = Map(r"C:\Users\Spril\Work\Pygame3\Pygame3\assets\images\Location\NewMap.tmx")
+        #self.map = Map(r"C:\Users\Spril\Work\Pygame3\Pygame3\assets\images\Tilesets\RPG\TiledMapEditor\SMD.tmx")
 
         # Створення гравця у центрі карти
         start_pos = (self.map.tmx_data.width * self.map.tmx_data.tilewidth // 2,
