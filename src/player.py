@@ -36,7 +36,7 @@ class Player(pygame.sprite.Sprite):
         frame_height = 16
 
         # Нарізка кадрів
-        for j in range(4):  # теперь перебираем кадры для каждого направления
+        for j in range(4):
             animations["down"].append(sprite_sheet.subsurface(pygame.Rect(0 * frame_width, j * frame_height, frame_width, frame_height)))
             animations["up"].append(sprite_sheet.subsurface(pygame.Rect(1 * frame_width, j * frame_height, frame_width, frame_height)))
             animations["left"].append(sprite_sheet.subsurface(pygame.Rect(2 * frame_width, j * frame_height, frame_width, frame_height)))
@@ -47,7 +47,7 @@ class Player(pygame.sprite.Sprite):
     def update(self, dt, keys):
         dx = 0
         dy = 0
-        moving = False  # Флаг для отслеживания движения
+        moving = False  # Відслідкувати рух
         #
         if self.sprint:
             self.animation_speed = 0.2
@@ -80,39 +80,6 @@ class Player(pygame.sprite.Sprite):
             self.current_animation = self.animations["right"]
             moving = True
 
-
-
-
-        #
-        # if keys[pygame.K_w] and keys[pygame.K_LCTRL]:
-        #     dy = -self.speed * dt
-        #     self.current_animation = self.animations["up"]
-        #     moving = True
-        #     self.sprint = True
-        # elif keys[pygame.K_s] and keys[pygame.KMOD_SHIFT]:
-        #     dy = self.speed * dt
-        #     self.current_animation = self.animations["down"]
-        #     moving = True
-        #     self.sprint = True
-        # elif keys[pygame.K_a] and keys[pygame.KMOD_SHIFT]:
-        #     dx = -self.speed * dt
-        #     self.current_animation = self.animations["left"]
-        #     moving = True
-        #     self.sprint = True
-        # elif keys[pygame.K_d] and keys[pygame.KMOD_SHIFT]:
-        #     dx = self.speed * dt
-        #     self.current_animation = self.animations["right"]
-        #     moving = True
-        #     self.sprint = True
-        #
-        # else:
-        #     self.sprint = False
-
-
-
-
-
-
         # Оновлення позиції
         self.rect.x += dx
         self.rect.y += dy
@@ -124,6 +91,6 @@ class Player(pygame.sprite.Sprite):
                 self.frame_index = 0
             self.image = self.current_animation[int(self.frame_index)]
         else:
-            # если нет движения, возвращаемся на первый кадр текущей анимации
+            # повернення до статичної анімації без руху
             self.frame_index = 0
             self.image = self.current_animation[int(self.frame_index)]
