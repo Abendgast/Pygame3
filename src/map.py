@@ -13,7 +13,7 @@ class Map:
         # налаштування рендерера для відтворення карти
         screen_width, screen_height = pygame.display.get_surface().get_size()
         self.map_layer = pyscroll.BufferedRenderer(map_data, (screen_width, screen_height))
-        self.map_layer.zoom = 4.5  # масштабування
+        self.map_layer.zoom = 6.5  # масштабування
 
         # Створення групи спрайтів, яка включає картку та гравця
         self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
@@ -33,4 +33,4 @@ class Map:
 
     def add_player_to_group(self, player):
 
-        self.group.add(player, layer=6)
+        self.group.add(player, layer=2)

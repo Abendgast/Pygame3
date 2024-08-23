@@ -18,11 +18,6 @@ class Player(pygame.sprite.Sprite):
 
 
 
-
-
-
-
-
     def load_animations(self, filepath):
         sprite_sheet = pygame.image.load(filepath).convert_alpha()
         animations = {

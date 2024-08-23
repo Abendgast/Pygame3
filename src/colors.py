@@ -6,9 +6,19 @@ colorGREEN = "#00FF00"
 colorBLUE = "#0000FF"
 
 # ігрові кольори
-colorGRASS = "#7CFC00"
-colorWATER = "#1E90FF"
-colorSAND = "#F4A460"
+colorGRASS = "#74a334"
+colorWATER = "#71ddee"
+colorSAND = "#ffad5d"
+colorSAND2 = "#ffcb8d"
+
+
+
+
+
+
+
+
+
 
 # кольори інтерфейсу
 colorUI_BACKGROUND = "#2F4F4F"
