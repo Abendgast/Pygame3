@@ -6,7 +6,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, position):
         super().__init__()
         # Завантаження анімації та рухів
-        self.animations = self.load_animations(r"C:\Users\Spril\Work\Pygame3\Pygame3\assets\images\Tilesets\Ninja Adventure - Asset Pack\Actor\Characters\SamuraiRed\SeparateAnim\Walk.png")
+        self.animations = self.load_animations(r"C:\Users\Spril\Work\Pygame3\Pygame3\assets\images\Tilesets\Ninja Adventure - Asset Pack\Actor\Characters\RedNinja3\SeparateAnim\Walk.png")
         self.current_animation = self.animations["down"]
         self.frame_index = 0
         self.animation_speed = 0.1  # швидкість зміни кадрів
