@@ -42,42 +42,45 @@ class Player(pygame.sprite.Sprite):
     def update(self, dt, keys):
         dx = 0
         dy = 0
-        moving = False  # Відслідкувати рух
-        #
-        if self.sprint:
-            self.animation_speed = 0.2
-            self.speed = 150
+        moving = False
 
         if keys[pygame.K_LCTRL]:
             self.sprint = True
+            self.animation_speed = 0.2
+            self.speed = 150
         else:
             self.sprint = False
             self.speed = 100
             self.animation_speed = 0.1
 
         if keys[pygame.K_w]:
-            dy = -self.speed * dt
+            dy -= 1
             self.current_animation = self.animations["up"]
             moving = True
 
-        elif keys[pygame.K_s]:
-            dy = self.speed * dt
+        if keys[pygame.K_s]:
+            dy += 1
             self.current_animation = self.animations["down"]
             moving = True
 
-        elif keys[pygame.K_a]:
-            dx = -self.speed * dt
+        if keys[pygame.K_a]:
+            dx -= 1
             self.current_animation = self.animations["left"]
             moving = True
 
-        elif keys[pygame.K_d]:
-            dx = self.speed * dt
+        if keys[pygame.K_d]:
+            dx += 1
             self.current_animation = self.animations["right"]
             moving = True
 
-        # Оновлення позиції
-        self.rect.x += dx
-        self.rect.y += dy
+        # Нормализация движения
+        if dx != 0 and dy != 0:
+            dx *= 0.7071
+            dy *= 0.7071
+
+        # Применение скорости и дельты времени
+        self.rect.x += dx * self.speed * dt
+        self.rect.y += dy * self.speed * dt
 
         if moving:
             # Оновлення кадра анімації тільки при русі
