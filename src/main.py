@@ -6,8 +6,8 @@ from game import Game
 pygame.init()
 
 # налаштування вікна
-SCREEN_WIDTH = 960
-SCREEN_HEIGHT = 640
+SCREEN_WIDTH = 1920
+SCREEN_HEIGHT = 1080
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("RPG Game")
 
