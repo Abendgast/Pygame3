@@ -32,5 +32,5 @@ class Map:
         self.group.center(position)
 
     def add_player_to_group(self, player):
-        # Добавляем игрока в нужный слой
-        self.group.add(player, layer=3)  # Добавляем в третий слой (начиная с 0)
+
+        self.group.add(player, layer=6)

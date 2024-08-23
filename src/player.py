@@ -3,8 +3,8 @@ import pygame
 class Player(pygame.sprite.Sprite):
     def __init__(self, position):
         super().__init__()
-        self.image = pygame.Surface((16, 32))
-        self.image.fill((255, 0, 0))
+        self.image = pygame.Surface((8, 16))
+        self.image.fill((47, 31, 255))
         self.rect = self.image.get_rect(center=position)
         self.speed = 200
 

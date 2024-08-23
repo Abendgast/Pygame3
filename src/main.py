@@ -14,7 +14,6 @@ pygame.display.set_caption("RPG Game")
 # створення екземпляру
 game = Game(screen)
 
-
 # Основний цикл
 clock = pygame.time.Clock()
 running = True  # прапор для керування циклом
