@@ -18,6 +18,27 @@ class Map:
         # Створення групи спрайтів, яка включає картку та гравця
         self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
 
+        # Получаем слой коллизий
+        self.collision_layer = self.get_collision_layer()
+
+    def get_collision_layer(self):
+        # Возвращаем список всех тайлов коллизии
+        collision_tiles = []
+        for x, y, gid in self.tmx_data.get_layer_by_name('Collision'):
+            tile = self.tmx_data.get_tile_image_by_gid(gid)
+            if tile:
+                rect = pygame.Rect(x * self.tmx_data.tilewidth, y * self.tmx_data.tileheight,
+                                   self.tmx_data.tilewidth, self.tmx_data.tileheight)
+                collision_tiles.append(rect)
+        return collision_tiles
+
+    def check_collision(self, rect):
+        # Проверяем коллизию с любым тайлом на слое коллизий
+        for tile_rect in self.collision_layer:
+            if rect.colliderect(tile_rect):
+                return True
+        return False
+
     def draw(self, surface):
         # Малювання карти та об'єктів
         self.group.draw(surface)
@@ -32,5 +53,4 @@ class Map:
         self.group.center(position)
 
     def add_player_to_group(self, player):
-
         self.group.add(player, layer=2)

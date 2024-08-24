@@ -8,12 +8,11 @@ class Game:
 
         # Завантаження карти
         self.map = Map(r"C:\Users\Spril\Work\Pygame3\Pygame3\assets\images\Location\NewMap.tmx")
-        #self.map = Map(r"C:\Users\Spril\Work\Pygame3\Pygame3\assets\images\Tilesets\RPG\TiledMapEditor\SMD.tmx")
 
         # Створення гравця у центрі карти
         start_pos = (self.map.tmx_data.width * self.map.tmx_data.tilewidth // 2,
                      self.map.tmx_data.height * self.map.tmx_data.tileheight // 2)
-        self.player = Player(start_pos)
+        self.player = Player(start_pos, self.map)
 
         # Додавання гравця у слої
         self.map.add_player_to_group(self.player)

@@ -1,9 +1,7 @@
-from email.policy import default
-
 import pygame
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, position):
+    def __init__(self, position, game_map):
         super().__init__()
         # Завантаження анімації та рухів
         self.animations = self.load_animations(r"C:\Users\Spril\Work\Pygame3\Pygame3\assets\images\Tilesets\Ninja Adventure - Asset Pack\Actor\Characters\RedNinja3\SeparateAnim\Walk.png")
@@ -11,12 +9,11 @@ class Player(pygame.sprite.Sprite):
         self.frame_index = 0
         self.animation_speed = 0.1  # швидкість зміни кадрів
         self.sprint = False
+        self.map = game_map
 
         self.image = self.current_animation[self.frame_index]
         self.rect = self.image.get_rect(center=position)
         self.speed = 100
-
-
 
     def load_animations(self, filepath):
         sprite_sheet = pygame.image.load(filepath).convert_alpha()
@@ -78,9 +75,13 @@ class Player(pygame.sprite.Sprite):
             dx *= 0.7071
             dy *= 0.7071
 
-        # Применение скорости и дельты времени
-        self.rect.x += dx * self.speed * dt
-        self.rect.y += dy * self.speed * dt
+        # Проверка коллизии перед перемещением
+        new_rect = self.rect.copy()
+        new_rect.x += dx * self.speed * dt
+        new_rect.y += dy * self.speed * dt
+
+        if not self.map.check_collision(new_rect):
+            self.rect = new_rect
 
         if moving:
             # Оновлення кадра анімації тільки при русі
