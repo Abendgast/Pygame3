@@ -18,11 +18,11 @@ class Map:
         # Створення групи спрайтів, яка включає картку та гравця
         self.group = pyscroll.PyscrollGroup(map_layer=self.map_layer, default_layer=1)
 
-        # Получаем слой коллизий
+        # Слой колізій
         self.collision_layer = self.get_collision_layer()
 
     def get_collision_layer(self):
-        # Возвращаем список всех тайлов коллизии
+        # Повернення тайлів колізії
         collision_tiles = []
         for x, y, gid in self.tmx_data.get_layer_by_name('Collision'):
             tile = self.tmx_data.get_tile_image_by_gid(gid)
@@ -33,7 +33,7 @@ class Map:
         return collision_tiles
 
     def check_collision(self, rect):
-        # Проверяем коллизию с любым тайлом на слое коллизий
+        # Перевірка колізії
         for tile_rect in self.collision_layer:
             if rect.colliderect(tile_rect):
                 return True

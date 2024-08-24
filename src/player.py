@@ -37,8 +37,8 @@ class Player(pygame.sprite.Sprite):
         return animations
 
     def update(self, dt, keys):
-        dx = 0
-        dy = 0
+        original_rect = self.rect.copy()
+        dx, dy = 0, 0
         moving = False
 
         if keys[pygame.K_LCTRL]:
@@ -51,45 +51,41 @@ class Player(pygame.sprite.Sprite):
             self.animation_speed = 0.1
 
         if keys[pygame.K_w]:
-            dy -= 1
+            dy -= self.speed * dt
             self.current_animation = self.animations["up"]
             moving = True
 
         if keys[pygame.K_s]:
-            dy += 1
+            dy += self.speed * dt
             self.current_animation = self.animations["down"]
             moving = True
 
         if keys[pygame.K_a]:
-            dx -= 1
+            dx -= self.speed * dt
             self.current_animation = self.animations["left"]
             moving = True
 
         if keys[pygame.K_d]:
-            dx += 1
+            dx += self.speed * dt
             self.current_animation = self.animations["right"]
             moving = True
 
-        # Нормализация движения
-        if dx != 0 and dy != 0:
-            dx *= 0.7071
-            dy *= 0.7071
+        # перевірка колізій X
+        self.rect.x += dx
+        if self.map.check_collision(self.rect):
+            self.rect.x = original_rect.x  # повернення в дефолтне положення X
 
-        # Проверка коллизии перед перемещением
-        new_rect = self.rect.copy()
-        new_rect.x += dx * self.speed * dt
-        new_rect.y += dy * self.speed * dt
+        # перевірка колізій Y
+        self.rect.y += dy
+        if self.map.check_collision(self.rect):
+            self.rect.y = original_rect.y  # повернення в дефолтне положення Y
 
-        if not self.map.check_collision(new_rect):
-            self.rect = new_rect
-
+        # Анімація руху
         if moving:
-            # Оновлення кадра анімації тільки при русі
             self.frame_index += self.animation_speed
             if self.frame_index >= len(self.current_animation):
                 self.frame_index = 0
             self.image = self.current_animation[int(self.frame_index)]
         else:
-            # повернення до статичної анімації без руху
             self.frame_index = 0
             self.image = self.current_animation[int(self.frame_index)]
