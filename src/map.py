@@ -53,4 +53,4 @@ class Map:
         self.group.center(position)
 
     def add_player_to_group(self, player):
-        self.group.add(player, layer=2)
+        self.group.add(player, layer=4)
